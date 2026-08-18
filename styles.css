@@ -1,0 +1,425 @@
+:root {
+  color-scheme: dark;
+  --ease-soft: cubic-bezier(.22, 1, .36, 1);
+  --ease-snap: cubic-bezier(.16, 1, .3, 1);
+  background: #000;
+  font-family: Manrope, Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html { min-width: 320px; background: #000; scroll-behavior: smooth; }
+/* `clip` rather than `hidden`: `hidden` would turn body into a scroll
+   container and stop .figma-page from sticking to the viewport. */
+body { min-width: 320px; margin: 0; overflow-x: clip; background: #000; }
+::selection { color: #fff; background: rgba(4, 182, 129, .5); }
+.water-canvas { display: none !important; }
+
+.skip-link {
+  position: fixed;
+  z-index: 100;
+  top: 12px;
+  left: 12px;
+  padding: 10px 14px;
+  border-radius: 999px;
+  color: #fff;
+  background: #087f5e;
+  transform: translateY(-170%);
+  transition: transform .3s var(--ease-soft);
+}
+.skip-link:focus { transform: none; }
+
+.figma-page {
+  position: relative;
+  container-type: inline-size;
+  width: min(100%, 1728px);
+  margin-inline: auto;
+  overflow: hidden;
+  background: #000;
+  isolation: isolate;
+}
+
+/* Each stage sticks the page to the viewport for the length of the spacer that
+   follows it, so scrolling drives an animation in place instead of movement.
+   Offsets are measured in script.js. */
+.is-pin-armed .figma-page {
+  position: sticky;
+  top: var(--pin-tabs-top, 0px);
+}
+.is-pin-armed .pin-stage--tabs {
+  position: sticky;
+  top: var(--pin-modes-top, 0px);
+}
+.pin-spacer { width: 100%; pointer-events: none; }
+.pin-spacer[data-pin-spacer="tabs"] { height: var(--pin-tabs-distance, 0px); }
+.pin-spacer[data-pin-spacer="modes"] { height: var(--pin-modes-distance, 0px); }
+
+/* --- Modes run --------------------------------------------------------- */
+/* Covers the live page for the whole run. Its own black is the plane the strip
+   rides on and the pale section emerges from. Placed outside .figma-page: that
+   element is a containing block for fixed descendants, which would anchor this
+   to the page instead of the viewport. Geometry is set in script.js. */
+.section-swipe {
+  position: fixed;
+  top: 0;
+  z-index: 50;
+  overflow: hidden;
+  background: #000;
+  visibility: hidden;
+  pointer-events: none;
+}
+.section-swipe.is-active { visibility: visible; }
+
+/* Comes forward out of the black rather than in from the side. */
+.section-swipe__back {
+  position: absolute;
+  inset: 0;
+  display: block;
+  background-repeat: no-repeat;
+  background-image: url("./public/assets/mixar-landing-exact.png");
+  opacity: var(--back-fade, 0);
+  transform: scale(var(--back-scale, 0.92));
+}
+
+/* Three stitched copies of the section — the only thing that moves sideways. */
+.section-swipe__strip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  width: 300%;
+  height: 100%;
+  transform: translate3d(var(--strip-x, 0%), 0, 0);
+}
+.section-swipe__panel {
+  flex: 0 0 33.333333%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: url("./public/assets/mixar-landing-exact.png");
+}
+.section-swipe.is-active .section-swipe__strip,
+.section-swipe.is-active .section-swipe__back { will-change: transform, opacity; }
+
+.figma-export { position: relative; z-index: 1; width: 100%; }
+.figma-export img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  pointer-events: none;
+}
+
+.semantic-layer {
+  position: absolute;
+  z-index: 2;
+  inset: 0;
+  pointer-events: none;
+}
+.hero-control-origin-mask,
+.hero-control {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+}
+.hero-control-origin-mask {
+  z-index: 1;
+  background: #000;
+}
+.hero-control-origin-mask--cookie { border-radius: 7px; }
+.hero-control-origin-mask--gizmo { border-radius: 50%; }
+.hero-control-origin-mask--mixie { border-radius: 999px; }
+.hero-control {
+  z-index: 3;
+  max-width: none;
+  object-fit: fill;
+}
+.semantic-layer [data-text] {
+  position: absolute;
+  z-index: 2;
+  width: max-content;
+  max-width: 72%;
+  margin: 0;
+  overflow: hidden;
+  color: rgba(255, 255, 255, .001);
+  font-family: Switzer, Manrope, Inter, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.05;
+  white-space: nowrap;
+  pointer-events: auto;
+  user-select: text;
+}
+.hotspot, .signup-hotspot {
+  position: absolute;
+  z-index: 4;
+  display: block;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  overflow: hidden;
+  pointer-events: auto;
+  transition: none;
+}
+.hotspot:focus-visible {
+  outline: 1px solid rgba(255,255,255,.36);
+  outline-offset: 1px;
+}
+.hero-parallax {
+  position: absolute;
+  z-index: 3;
+  overflow: visible;
+  pointer-events: auto;
+}
+.hero-parallax__erase {
+  position: absolute;
+  inset: 0;
+  background: #000;
+  -webkit-mask: url("./public/assets/hero-object.png") center / 100% 100% no-repeat;
+  mask: url("./public/assets/hero-object.png") center / 100% 100% no-repeat;
+  opacity: 0;
+  transition: opacity .18s linear;
+  pointer-events: none;
+}
+.hero-parallax img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: contain;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(var(--hero-x, 0), var(--hero-y, 0), 0) rotate(var(--hero-r, 0deg));
+  transform-origin: 52% 52%;
+  transition: opacity .18s linear, transform .7s var(--ease-soft);
+  will-change: opacity, transform;
+}
+.hero-parallax.is-active .hero-parallax__erase,
+.hero-parallax.is-active img { opacity: 1; }
+
+.gallery-marquee {
+  position: absolute;
+  z-index: 3;
+  overflow: hidden;
+  background: #000;
+  pointer-events: auto;
+  isolation: isolate;
+}
+.gallery-marquee::before,
+.gallery-marquee::after {
+  content: "";
+  position: absolute;
+  z-index: 3;
+  top: 0;
+  bottom: 0;
+  pointer-events: none;
+}
+.gallery-marquee::before {
+  left: 0;
+  width: 50.578704cqw;
+  background: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0) 100%);
+}
+.gallery-marquee::after {
+  right: -0.289352cqw;
+  width: 50.347222cqw;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, #000 100%);
+}
+.gallery-row {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 16.840278cqw;
+  overflow: hidden;
+}
+.gallery-row--top { top: 2.025463cqw; }
+.gallery-row--bottom { top: 20.428241cqw; }
+.gallery-track {
+  display: flex;
+  width: max-content;
+  height: 100%;
+  animation-duration: 90s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+.gallery-row--top .gallery-track { animation-name: gallery-drift-left; }
+.gallery-row--bottom .gallery-track { animation-name: gallery-drift-right; }
+.gallery-segment {
+  display: flex;
+  flex: none;
+  gap: 1.62037cqw;
+  height: 100%;
+  padding-right: 1.62037cqw;
+}
+.gallery-card {
+  position: relative;
+  flex: none;
+  width: 20.138889cqw;
+  height: 16.840278cqw;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 1.157407cqw;
+  background: #050505;
+}
+.gallery-card img {
+  position: absolute;
+  left: var(--image-left);
+  top: var(--image-top);
+  display: block;
+  width: var(--image-width);
+  height: var(--image-height);
+  max-width: none;
+  user-select: none;
+}
+
+@keyframes gallery-drift-left {
+  from { transform: translate3d(-18.80787cqw, 0, 0); }
+  to { transform: translate3d(calc(-18.80787cqw - 50%), 0, 0); }
+}
+
+@keyframes gallery-drift-right {
+  from { transform: translate3d(calc(-5.555556cqw - 50%), 0, 0); }
+  to { transform: translate3d(-5.555556cqw, 0, 0); }
+}
+
+.scroll-tabs-frame {
+  position: absolute;
+  z-index: 3;
+  pointer-events: none;
+}
+.scroll-tabs-panel {
+  position: absolute;
+  left: 0;
+  top: 43.690476%;
+  display: grid;
+  grid-template-rows: 259fr 107fr 107fr;
+  width: 37.76178%;
+  height: 56.309524%;
+  overflow: hidden;
+  border: 1px solid #171b1a;
+  border-radius: 0 0 0 1.041667cqw;
+  background: #000;
+  pointer-events: auto;
+  transition: grid-template-rows .48s var(--ease-soft);
+}
+.scroll-tabs-panel[data-active-index="1"] { grid-template-rows: 107fr 259fr 107fr; }
+.scroll-tabs-panel[data-active-index="2"] { grid-template-rows: 107fr 107fr 259fr; }
+.scroll-tab {
+  display: grid;
+  grid-template-columns: 1.157407cqw minmax(0, 1fr);
+  align-items: center;
+  gap: 1.62037cqw;
+  min-height: 0;
+  padding: 0 1.50463cqw;
+  overflow: hidden;
+  border: 0;
+  border-top: 1px solid #171b1a;
+  border-radius: 0;
+  outline: none;
+  background: #000;
+  color: rgba(201, 201, 201, .18);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: color .4s var(--ease-soft), background-color .4s var(--ease-soft);
+}
+.scroll-tab:first-child { border-top: 0; }
+.scroll-tab__number {
+  align-self: center;
+  font-family: Manrope, Inter, sans-serif;
+  font-size: .810185cqw;
+  font-weight: 400;
+  line-height: 1;
+  transition: color .4s var(--ease-soft);
+}
+.scroll-tab__copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+.scroll-tab__title {
+  display: block;
+  overflow: hidden;
+  font-family: Switzer, Manrope, Inter, sans-serif;
+  font-size: 1.388889cqw;
+  font-weight: 400;
+  line-height: 1.08;
+  white-space: nowrap;
+  transition: color .4s var(--ease-soft), font-size .48s var(--ease-soft), line-height .48s var(--ease-soft);
+}
+.scroll-tab__accent { display: inline; }
+.scroll-tab__description {
+  display: block;
+  width: 24.305556cqw;
+  max-height: 0;
+  margin-top: 0;
+  overflow: hidden;
+  color: rgba(201, 201, 201, 0);
+  font-family: Manrope, Inter, sans-serif;
+  font-size: 1.388889cqw;
+  font-weight: 400;
+  line-height: 1.06;
+  transition: max-height .48s var(--ease-soft), margin-top .48s var(--ease-soft), color .32s ease;
+}
+.scroll-tab.is-active { color: rgba(201, 201, 201, .68); }
+.scroll-tab.is-active .scroll-tab__number {
+  align-self: start;
+  margin-top: 2.777778cqw;
+  color: rgba(201, 201, 201, .48);
+}
+.scroll-tab.is-active .scroll-tab__title {
+  font-size: 2.314815cqw;
+  line-height: 1.06;
+  white-space: normal;
+}
+.scroll-tab.is-active .scroll-tab__title > span { display: block; }
+.scroll-tab.is-active .scroll-tab__accent {
+  width: fit-content;
+  color: transparent;
+  background: linear-gradient(90deg, #7bcf16 0%, #00b98d 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+}
+.scroll-tab.is-active .scroll-tab__description {
+  max-height: 5.555556cqw;
+  margin-top: .694444cqw;
+  color: rgba(201, 201, 201, .63);
+}
+.scroll-tab:focus-visible { box-shadow: inset 0 0 0 1px rgba(0, 185, 141, .55); }
+
+.signup-hotspot { border-radius: 32px; }
+.signup-hotspot input {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0 175px 0 20px;
+  border: 0;
+  outline: none;
+  background: transparent;
+  color: rgba(255,255,255,.001);
+  caret-color: #04b681;
+}
+.signup-hotspot input:focus { box-shadow: inset 0 0 0 1px rgba(4,182,129,.5); border-radius: 32px; }
+.signup-hotspot button { position: absolute; top: 0; right: 0; width: 164px; height: 100%; border: 0; border-radius: 32px; background: transparent; cursor: pointer; }
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
+
+@media (min-width: 1729px) {
+  body { background: #050505; }
+  .figma-page { box-shadow: 0 0 100px rgba(0,0,0,.8); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .hotspot { transition: none; }
+  .hero-parallax__erase, .hero-parallax img { opacity: 0; transform: none; transition: none; }
+  .gallery-track { animation: none; }
+  .gallery-row--top .gallery-track { transform: translate3d(-18.80787cqw, 0, 0); }
+  .gallery-row--bottom .gallery-track { transform: translate3d(-5.555556cqw, 0, 0); }
+  .scroll-tabs-panel,
+  .scroll-tab,
+  .scroll-tab__number,
+  .scroll-tab__title,
+  .scroll-tab__description { transition: none; }
+}

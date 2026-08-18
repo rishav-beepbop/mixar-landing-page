@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Mixar — an AI-native 3D editor built on Blender." />
+    <meta name="theme-color" content="#000000" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    <title>Mixar — AI-native 3D creation</title>
+    <link rel="preload" href="./public/assets/mixar-landing-exact.png" as="image" type="image/png" />
+    <link rel="stylesheet" href="./styles.css?v=20260817-18" />
+  </head>
+  <body>
+    <a class="skip-link" href="#design">Skip to the design</a>
+
+    <!-- Nested sticky stages: the inner one holds the page still for the agent
+         tab run, the outer one for the horizontal modes run. One element can
+         only stick once, hence the nesting. -->
+    <div class="pin-stage pin-stage--modes" data-pin-stage="modes">
+    <div class="pin-stage pin-stage--tabs" data-pin-stage="tabs">
+
+    <main id="design" class="figma-page" aria-label="Mixar product website">
+      <div class="figma-export" aria-hidden="true">
+        <img src="./public/assets/mixar-landing-exact.png" width="1728" height="11981" alt="" />
+      </div>
+
+      <div class="semantic-layer" aria-label="Selectable website content">
+        <span class="hero-control-origin-mask hero-control-origin-mask--cookie" data-box data-x="619" data-y="912" data-w="494" data-h="40" aria-hidden="true"></span>
+        <span class="hero-control-origin-mask hero-control-origin-mask--gizmo" data-box data-x="829" data-y="1017" data-w="69.5" data-h="69.5" aria-hidden="true"></span>
+        <span class="hero-control-origin-mask hero-control-origin-mask--mixie" data-box data-x="1510" data-y="1025" data-w="180" data-h="50" aria-hidden="true"></span>
+        <img class="hero-control hero-control--cookie" src="./public/assets/hero-cookie-consent.png" width="492" height="38" data-box data-x="620" data-y="806" data-w="492" data-h="38" data-hero-cookie alt="" aria-hidden="true" />
+        <img class="hero-control hero-control--gizmo" src="./public/assets/hero-gizmo-axis.png" width="68" height="68" data-box data-x="830" data-y="858" data-w="67.31" data-h="67.31" data-hero-bottom="gizmo" alt="" aria-hidden="true" />
+        <img class="hero-control hero-control--mixie" src="./public/assets/hero-talk-to-mixie.png" width="178" height="48" data-box data-x="1511" data-y="877.31" data-w="178" data-h="48" data-hero-bottom="mixie" alt="" aria-hidden="true" />
+        <div class="hero-parallax" data-box data-x="353" data-y="49" data-w="1021" data-h="1021" aria-hidden="true">
+          <span class="hero-parallax__erase"></span>
+          <img src="./public/assets/hero-object.png" alt="" data-hero-parallax />
+        </div>
+
+        <section class="gallery-marquee" data-box data-x="0" data-y="1711" data-w="1728" data-h="711" aria-label="Mixar community artwork gallery">
+          <div class="gallery-row gallery-row--top">
+            <div class="gallery-track">
+              <div class="gallery-segment">
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-10.png" alt="Surreal green landscape artwork" style="--image-left:0%;--image-top:-56.3001%;--image-width:100%;--image-height:212.60032%" /></figure>
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-02.png" alt="Stylized 3D coffee shop artwork" style="--image-left:0%;--image-top:-9.79381%;--image-width:100%;--image-height:119.588%" /></figure>
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-04.png" alt="Chair on a sunlit grassy hill" style="--image-left:0%;--image-top:-39.0806%;--image-width:100%;--image-height:178.16088%" /></figure>
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-06.png" alt="Translucent green sculptural form" style="--image-left:-0.123375%;--image-top:-4.79992%;--image-width:100%;--image-height:209.60307%" /></figure>
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-08.png" alt="Surreal green room with a red chair" style="--image-left:0%;--image-top:-24.7423%;--image-width:100%;--image-height:149.485%" /></figure>
+              </div>
+            </div>
+          </div>
+
+          <div class="gallery-row gallery-row--bottom">
+            <div class="gallery-track">
+              <div class="gallery-segment">
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-03.png" alt="Floating island and swing artwork" style="--image-left:0%;--image-top:-69.5876%;--image-width:100%;--image-height:239.174976%" /></figure>
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-05.png" alt="Singer recording in a sunlit studio" style="--image-left:-5.4704%;--image-top:0%;--image-width:110.9409%;--image-height:100%" /></figure>
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-07.png" alt="Stylized 3D tram and city scene" style="--image-left:0%;--image-top:-9.79381%;--image-width:100%;--image-height:119.58732%" /></figure>
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-09.png" alt="Purple doorway in a flower field" style="--image-left:0%;--image-top:-56.264%;--image-width:100%;--image-height:212.567764%" /></figure>
+                <figure class="gallery-card"><img src="./public/assets/gallery-source-11.png" alt="Lavender field beneath monumental arches" style="--image-left:0%;--image-top:-24.7423%;--image-width:100%;--image-height:149.484%" /></figure>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="scroll-tabs-frame" data-box data-x="80" data-y="3955" data-w="1528" data-h="840" data-scroll-tabs aria-label="Mixar agent workflow">
+          <div class="scroll-tabs-panel" data-tabs-panel data-active-index="0">
+            <button class="scroll-tab is-active" type="button" data-tab-index="0" aria-pressed="true">
+              <span class="scroll-tab__number">01</span>
+              <span class="scroll-tab__copy">
+                <span class="scroll-tab__title"><span>One Scene.</span> <span class="scroll-tab__accent">Many Agents.</span></span>
+                <span class="scroll-tab__description">Each object gets its own AI agent — modeling and texturing happen at once, not one by one.</span>
+              </span>
+            </button>
+            <button class="scroll-tab" type="button" data-tab-index="1" aria-pressed="false">
+              <span class="scroll-tab__number">02</span>
+              <span class="scroll-tab__copy">
+                <span class="scroll-tab__title"><span>Every Move.</span> <span class="scroll-tab__accent">You Approve</span></span>
+                <span class="scroll-tab__description">Review every step before it runs, approve the action, and stay in control of the scene.</span>
+              </span>
+            </button>
+            <button class="scroll-tab" type="button" data-tab-index="2" aria-pressed="false">
+              <span class="scroll-tab__number">03</span>
+              <span class="scroll-tab__copy">
+                <span class="scroll-tab__title"><span>Your Key.</span> <span class="scroll-tab__accent">Your Rules.</span></span>
+                <span class="scroll-tab__description">Choose your own provider and models, using the keys and workflow that belong to you.</span>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <span data-text data-x="725" data-y="48">V3.2.1 LIVE NOW</span>
+        <span data-text data-x="1279" data-y="48">Download</span>
+        <span data-text data-x="1436" data-y="49">About</span>
+        <span data-text data-x="1516" data-y="49">Pricing</span>
+        <h1 data-text data-x="51" data-y="396">3D, Now With a Mind of Its Own</h1>
+        <span data-text data-x="1259" data-y="497">A complete 3D editor built on Blender, rebuilt around AI.</span>
+        <span data-text data-x="96" data-y="621">Try Now!</span>
+        <span data-text data-x="51" data-y="1240">ABOUT</span>
+        <h2 data-text data-x="347" data-y="1231">Mixar is an AI-native 3D editor built on Blender — where agents build the scene, and you build the vision.</h2>
+        <span data-text data-x="347" data-y="1474">One Platform. Every 3D Possibility.</span>
+        <span data-text data-x="814" data-y="1483">No more switching tools. Just one editor, built to do it all.</span>
+        <h2 data-text data-x="602" data-y="2534">Not a Plugin. A Platform.</h2>
+        <span data-text data-x="627" data-y="2597">Agent takes care of everything. Just Ask</span>
+        <h2 data-text data-x="252" data-y="3647">Everything You Need to Design, Texture, and Build in 3D. All in One Place</h2>
+        <span data-text data-x="1027" data-y="3647">No exporting, no re-importing, no broken pipeline — just one continuous flow.</span>
+        <h3 data-text data-x="159" data-y="4377">One Scene. Many Agents.</h3>
+        <span data-text data-x="159" data-y="4469">Each object gets its own AI agent — modeling and texturing happen at once, not one by one.</span>
+        <span data-text data-x="159" data-y="4635">Every Move. You Approve</span>
+        <span data-text data-x="159" data-y="4744">Your Key. Your Rules.</span>
+        <span data-text data-x="638" data-y="5011">Powered by the best models in 3D.</span>
+        <span data-text data-x="638" data-y="5044">One license, one workflow, every model.</span>
+        <h2 data-text data-x="95" data-y="6267">Modes Built for How You Actually Work</h2>
+        <span data-text data-x="95" data-y="6399">A new way to interact with the existing flow.</span>
+        <span data-text data-x="833" data-y="6441">Less UI. More Work.</span>
+        <span data-text data-x="1339" data-y="6441">Hide the panels, menus, and clutter. Just you, your scene, and the work in front of you.</span>
+
+        <h2 data-text data-x="58" data-y="6902">Welcome to a New Dimension of Creating</h2>
+        <span data-text data-x="58" data-y="7086">Not an upgrade to how you work. A completely different place to build from.</span>
+        <span data-text data-x="1291" data-y="7012">v3.2 Out Now!</span>
+        <h3 id="open-source" data-text data-x="56" data-y="7544">Open Source</h3>
+        <span data-text data-x="58" data-y="7615">Clone it, run it, change it. Nothing about how Mixar works is hidden.</span>
+        <h3 data-text data-x="925" data-y="7547">Bring your own key.</h3>
+        <span data-text data-x="925" data-y="7615">Run on your own provider, one OpenRouter key for 400+ models, or your existing Codex subscription. No new billing to set up.</span>
+        <span data-text data-x="959" data-y="8140">Download Now!</span>
+        <h2 data-text data-x="58" data-y="8439">Who’s building with Mixar</h2>
+        <span data-text data-x="473" data-y="8439">Mixar is currently being used by many professionals and passionate people across the globe.</span>
+        <span data-text data-x="624" data-y="8848">Indie Game Studios</span>
+        <span data-text data-x="934" data-y="8848">Character Artists</span>
+        <span data-text data-x="934" data-y="9010">Technical Artists</span>
+        <span data-text data-x="1304" data-y="9010">Concept &amp; Environment</span>
+        <span data-text data-x="90" data-y="9110">Solo Creators</span>
+        <span data-text data-x="496" data-y="9110">Real estate concepting</span>
+        <span data-text data-x="764" data-y="9398">Architecture &amp; interiors</span>
+        <h2 data-text data-x="58" data-y="9747">See it built, start to finish</h2>
+        <span data-text data-x="-32" data-y="10541">MODELLING</span>
+        <span data-text data-x="290" data-y="10541">TEXTURING</span>
+        <span data-text data-x="608" data-y="10541">ANIMATION</span>
+        <span data-text data-x="921" data-y="10541">RIGGING</span>
+        <span data-text data-x="1164" data-y="10541">AGENTIC</span>
+        <span data-text data-x="1419" data-y="10541">AI VIDEO GEN</span>
+        <h2 data-text data-x="58" data-y="11004">Direct the art. Skip the grunt work.</h2>
+        <span data-text data-x="743" data-y="11069">You bring the vision. We handle the rest.</span>
+        <span data-text data-x="1264" data-y="11091">Free to download, sign in to activate.</span>
+        <span data-text data-x="92" data-y="11174">Download Now!</span>
+        <span data-text data-x="209" data-y="11493">CONTACT US</span>
+        <span data-text data-x="1033" data-y="11501">PRODUCT</span>
+        <span data-text data-x="1203" data-y="11501">RESOURCES</span>
+        <span data-text data-x="1443" data-y="11501">AI</span>
+        <span data-text data-x="56" data-y="11829">Signup for Updates</span>
+        <span data-text data-x="75" data-y="11925">Enter E-mail</span>
+        <span data-text data-x="338" data-y="11913">Sign Up</span>
+        <span data-text data-x="1487" data-y="11911">mixar. All rights reserved.</span>
+        <span data-text data-x="1497" data-y="11934">Legal Cookie settings</span>
+
+        <a class="hotspot" data-box data-x="51" data-y="601" data-w="190" data-h="61" href="#download-area" aria-label="Try Mixar now"></a>
+        <a class="hotspot" data-box data-x="1252" data-y="34" data-w="131" data-h="43" href="#download-area" aria-label="Download Mixar"></a>
+        <a class="hotspot" data-box data-x="1511" data-y="877.31" data-w="178" data-h="48" data-hero-bottom="mixie-hotspot" href="#download-area" aria-label="Talk to Mixie"></a>
+        <a class="hotspot" data-box data-x="1459" data-y="6988" data-w="190" data-h="61" href="#download-area" aria-label="Try Mixar now"></a>
+        <a class="hotspot" data-box data-x="620" data-y="7544" data-w="190" data-h="61" href="#open-source" aria-label="View Mixar on GitHub"></a>
+        <a class="hotspot" data-box data-x="925" data-y="8121" data-w="244" data-h="61" href="#download-area" aria-label="Download Mixar now"></a>
+        <a class="hotspot" id="download-area" data-box data-x="58" data-y="11155" data-w="244" data-h="61" href="#signup" aria-label="Download Mixar"></a>
+        <form class="signup-hotspot" id="signup" data-box data-x="56" data-y="11899" data-w="404" data-h="61" aria-label="Sign up for Mixar updates">
+          <label class="sr-only" for="email">Email address</label>
+          <input id="email" type="email" required aria-label="Email address" />
+          <button type="submit" aria-label="Sign up"></button>
+        </form>
+      </div>
+    </main>
+
+    <div class="pin-spacer" data-pin-spacer="tabs" aria-hidden="true"></div>
+    </div>
+
+    <div class="pin-spacer" data-pin-spacer="modes" aria-hidden="true"></div>
+    </div>
+
+    <!-- Modes run. The strip is three copies of the modes section stitched side
+         by side; it is the only thing that travels horizontally. The pale
+         section sits behind it and simply comes forward — opacity and a small
+         scale — so it is not tied to the sideways travel at all. Both are crops
+         of the flattened export, framed exactly as the page frames them at each
+         end of the run, so entry and exit are seamless. -->
+    <div class="section-swipe" data-swipe aria-hidden="true">
+      <span class="section-swipe__back" data-swipe-back></span>
+      <span class="section-swipe__strip" data-swipe-strip>
+        <span class="section-swipe__panel"></span>
+        <span class="section-swipe__panel"></span>
+        <span class="section-swipe__panel"></span>
+      </span>
+    </div>
+
+    <script src="./script.js?v=20260817-18"></script>
+  </body>
+</html>
